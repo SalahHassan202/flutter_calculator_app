@@ -22,63 +22,84 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Calculator"), centerTitle: true),
-      body: Padding(
-        padding: const EdgeInsets.all(12),
+      body: SafeArea(
         child: Column(
           children: [
+            const Spacer(),
             Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  resText,
+                  resText.isEmpty ? '0' : resText,
                   style: const TextStyle(
-                    fontSize: 36,
+                    fontSize: 40,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
             ),
-            Row(
-              children: [
-                buildDigit('7'),
-                buildDigit('8'),
-                buildDigit('9'),
-                buildOperator('*'),
-              ],
+            const SizedBox(height: 20),
+            Container(
+              padding: const EdgeInsets.all(12),
+              margin: const EdgeInsets.symmetric(horizontal: 12),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 10,
+                    offset: Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      buildDigit('7'),
+                      buildDigit('8'),
+                      buildDigit('9'),
+                      buildOperator('*'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      buildDigit('4'),
+                      buildDigit('5'),
+                      buildDigit('6'),
+                      buildOperator('/'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      buildDigit('1'),
+                      buildDigit('2'),
+                      buildDigit('3'),
+                      buildOperator('+'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      buildDigit('.'),
+                      buildDigit('0'),
+                      CustomButton(
+                        text: '=',
+                        color: equalColor,
+                        onClickButton: onEqual,
+                      ),
+                      CustomButton(
+                        text: '-',
+                        color: minusColor,
+                        onClickButton: onOperatorClick,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-            Row(
-              children: [
-                buildDigit('4'),
-                buildDigit('5'),
-                buildDigit('6'),
-                buildOperator('/'),
-              ],
-            ),
-            Row(
-              children: [
-                buildDigit('1'),
-                buildDigit('2'),
-                buildDigit('3'),
-                buildOperator('+'),
-              ],
-            ),
-            Row(
-              children: [
-                buildDigit('.'),
-                buildDigit('0'),
-                CustomButton(
-                  text: '=',
-                  color: equalColor,
-                  onClickButton: onEqual,
-                ),
-                CustomButton(
-                  text: '-',
-                  color: minusColor,
-                  onClickButton: onOperatorClick,
-                ),
-              ],
-            ),
+            const Spacer(),
           ],
         ),
       ),
