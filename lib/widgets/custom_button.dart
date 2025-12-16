@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
-  final Function onClickButton;
+  final Function(String) onClickButton;
   const CustomButton({
     super.key,
     required this.text,
@@ -13,7 +13,9 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          onClickButton(text);
+        },
         child: Text(text, style: TextStyle(fontSize: 30)),
       ),
     );
